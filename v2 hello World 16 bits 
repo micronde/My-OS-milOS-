@@ -1,0 +1,20 @@
+[org 0x7c00]
+xor ax, ax
+mov ds, ax
+mov es, ax
+mov ss, ax
+mov sp, 0x7c00
+mov si, msg
+print_loop:
+    lodsb
+    cmp al, 0
+    je done
+    mov ah, 0x0e
+    int 0x10
+    jmp print_loop
+done:
+    jmp $
+msg db 'MILO', 0
+times 510-($-$$) db 0
+dw 0xAA55
+
